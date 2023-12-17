@@ -1,5 +1,6 @@
 package com.example.springbootwebtest.model;
 
+import jakarta.persistence.Id;
 import lombok.*;
 
 @Getter
@@ -8,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Note {
+    @Id
     private int id;
-    private int content;
+    private String content;
 }
