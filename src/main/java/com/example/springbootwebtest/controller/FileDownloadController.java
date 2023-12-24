@@ -22,7 +22,7 @@ public class FileDownloadController {
 
     @GetMapping("download/{fileName}")
     public ResponseEntity<InputStreamResource> download(@PathVariable String fileName) throws FileNotFoundException {
-        File file = new File("D:\\temp\\sample.txt");
+        File file = new File("D:\\temp\\"+fileName);
         HttpHeaders headers = new HttpHeaders();
 
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
