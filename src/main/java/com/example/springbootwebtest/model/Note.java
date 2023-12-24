@@ -12,4 +12,5 @@ public class Note {
     @Id
     private int id;
     private String content;
+
 }

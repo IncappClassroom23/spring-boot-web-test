@@ -2,11 +2,13 @@ package com.example.springbootwebtest.repository;
 
 import com.example.springbootwebtest.model.Note;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Qualifier("noteRepository")
 public class NoteRepositoryImpl implements NoteRepository{
     @Autowired
     JdbcTemplate jdbcTemplate;
