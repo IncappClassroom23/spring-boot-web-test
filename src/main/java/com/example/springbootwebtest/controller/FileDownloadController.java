@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 public class FileDownloadController {
@@ -21,17 +21,17 @@ public class FileDownloadController {
     }
 
     @GetMapping("download/{fileName}")
-    public ResponseEntity<InputStreamResource> download(@PathVariable String fileName) throws FileNotFoundException {
+    public ResponseEntity<byte[]> download(@PathVariable String fileName) throws IOException {
         File file = new File("D:\\temp\\"+fileName);
         HttpHeaders headers = new HttpHeaders();
-
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        Path path = Paths.get("D:\\temp\\"+fileName);
+        byte[] data = Files.readAllBytes(path);
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName);
         return ResponseEntity.ok()
                 .headers(headers)
                 .contentLength(file.length())
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(resource);
+                .body(data);
 
     }
 }

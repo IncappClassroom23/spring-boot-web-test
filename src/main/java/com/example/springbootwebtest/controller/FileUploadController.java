@@ -8,7 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @Controller
 public class FileUploadController {
@@ -21,8 +24,17 @@ public class FileUploadController {
 
     @PostMapping("/upload")
     public String upload(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
-        File f = new File("D:\\temp\\sample.txt");
+        String filePath = "D:\\temp\\sample.txt";
+        // way 1
+        File f = new File(filePath);
         file.transferTo(f);
+        // way 2
+        Files.write(Path.of(filePath),file.getBytes());
+
+        // way 3
+        try(FileOutputStream stream = new FileOutputStream(filePath)){
+            stream.write(file.getBytes());
+        }
         redirectAttributes.addFlashAttribute("message1", "File uploaded successfully: " + file.getOriginalFilename());
         return "redirect:/uploadFile";
     }
