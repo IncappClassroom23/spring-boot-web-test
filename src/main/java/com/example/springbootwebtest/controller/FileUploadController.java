@@ -28,13 +28,13 @@ public class FileUploadController {
         // way 1
         File f = new File(filePath);
         file.transferTo(f);
-        // way 2
-        Files.write(Path.of(filePath),file.getBytes());
-
-        // way 3
-        try(FileOutputStream stream = new FileOutputStream(filePath)){
-            stream.write(file.getBytes());
-        }
+//        // way 2
+//        Files.write(Path.of(filePath),file.getBytes());
+//
+//        // way 3
+//        try(FileOutputStream stream = new FileOutputStream(filePath)){
+//            stream.write(file.getBytes());
+//        }
         redirectAttributes.addFlashAttribute("message1", "File uploaded successfully: " + file.getOriginalFilename());
         return "redirect:/uploadFile";
     }

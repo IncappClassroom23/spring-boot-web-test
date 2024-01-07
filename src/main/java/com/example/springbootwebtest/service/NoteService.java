@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service;
 
 public interface NoteService {
     Note getNoteById(int id);
+    int save(Note note);
 }

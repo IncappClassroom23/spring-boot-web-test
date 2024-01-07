@@ -17,4 +17,9 @@ public class NoteRepositoryImpl implements NoteRepository{
     public Note getNoteById(int id) {
         return jdbcTemplate.queryForObject("Select * from note where id = ?",new Object[]{id},new BeanPropertyRowMapper<>(Note.class));
     }
+
+    @Override
+    public int save(Note note) {
+        return jdbcTemplate.update("insert into note (content) values (?)",note.getContent());
+    }
 }

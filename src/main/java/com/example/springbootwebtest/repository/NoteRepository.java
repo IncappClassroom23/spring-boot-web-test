@@ -4,4 +4,6 @@ import com.example.springbootwebtest.model.Note;
 
 public interface NoteRepository {
     Note getNoteById(int id);
+
+    int save(Note note);
 }
